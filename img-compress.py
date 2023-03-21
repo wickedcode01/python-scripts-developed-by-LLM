@@ -18,17 +18,17 @@ def compress_image(infile, outfile, quality):
 
 def compress_images_in_folder(folder_path, quality):
     for root, dirs, files in os.walk(folder_path):
-        for file in tqdm(files, desc="压缩进度"):
+        for file in tqdm(files, desc="Compression Progress"):
             if file.endswith('.jpg') or file.endswith('.jpeg') or file.endswith('.png'):
                 infile = os.path.join(root, file)
                 outfile = os.path.join(root, file[:-4] + '-compressed' + file[-4:])
                 compress_image(infile, outfile, quality)
                 before_size = os.path.getsize(infile)
                 after_size = os.path.getsize(outfile)
-                print(f"压缩前大小：{before_size}，压缩后大小：{after_size}，文件路径：{outfile}")
+                print(f"Before Compression Size: {before_size}, After Compression Size: {after_size}, File Path: {outfile}")
 
 if __name__ == '__main__':
-    quality = int(input('请输入压缩率（1-100）：'))
+    quality = int(input('Please enter the compression rate (1-100):'))
     file_path = filedialog.askopenfilename()
     if os.path.isdir(file_path):
         compress_images_in_folder(file_path, quality)
@@ -37,6 +37,6 @@ if __name__ == '__main__':
         compress_image(file_path, outfile, quality)
         before_size = os.path.getsize(file_path)
         after_size = os.path.getsize(outfile)
-        print(f"压缩前大小：{before_size}，压缩后大小：{after_size}，文件路径：{outfile}")
+        print(f"Before Compression Size: {before_size}, After Compression Size: {after_size}, File Path: {outfile}")
     else:
-        print('输入有误，请重新运行程序')
+        print('Input error, please run the program again')
